@@ -1,0 +1,84 @@
+html {
+    background-image: linear-gradient(to top right, #8e44ad 0%, #3498db 100%);
+    font-family: -apple-system, system-ui, BlinkMacSystemFont;
+    scroll-behavior: smooth;
+}
+
+h1{
+    font-size: 50px;
+      color: white;
+      background-image: linear-gradient(to left,  yellow, orange);
+      -webkit-background-clip: text;
+      -moz-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-align: center;
+  }
+  h3{
+      color: white;
+  }
+  h4{
+      position: absolute;
+      margin-top: 9px;
+      border: 2px solid white;
+      width: 4%;
+      display: flex;
+      justify-content: center;
+      border-radius: 30px;
+      transition-duration: 0.2s;
+  }
+  a{
+      text-decoration: none;
+      font-size: 35px;
+      color: white;
+  }
+  a:hover{
+      color: black;
+  }
+  h4:hover{
+    background-color: white;
+    transform: scale(0.95);
+  }
+  label{
+      font-size: 20px;
+      color: white;
+  }
+button{
+    background-color:inherit; /* Green */
+    padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+    color: white;
+    border: 2px solid #e7e7e7;
+    width: 170px;
+    border-radius: 30px;
+    letter-spacing: 1px;
+}
+button:hover {
+    background-color: #e7e7e7;
+    color: black;
+}
+input[type=number] {
+    width: 60px;
+    border: 2px solid orange;
+    background-color: inherit;
+    color: rgb(230, 240, 95);
+    font-size: 20px;
+    text-align: center;
+  }
+  input[type=placeholder]{
+      color: white;
+      opacity: 0.5;
+  }
+  li{
+      color: white;
+      font-size: 17px;
+  }
+.box-space{
+    /* box in one single line */
+}

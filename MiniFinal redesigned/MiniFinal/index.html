@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="icon" href="./images/title3.png" type="image/icon type">
+    <link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@500&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Encode+Sans+SC:wght@600&display=swap" rel="stylesheet">
+
+    <title>Prim's and Kruskal Algorithm Visulaisation</title>
+
+    
+</head>
+<body>
+    <header>
+        <h1>PRIM'S AND KRUSKAL ALGORITHM VISUALISATION</h1>
+        <div class="navbar">
+            <nav>
+                <ul>
+                  <li><a href="index.html">Home</a></li>
+                  <li> <a href="#prims">PRIM'S</a></li>
+                  <li><a href="#kruskal">KRUSKAL</a></li>
+                  <li><a href="#about">About</a></li>
+                  <li><a href="#buttons" class="sim-btn">Simulate Now</a></li>
+                </ul>
+              </nav>    
+        </div>
+        
+    </header>
+
+    <div class="basics">
+        <h2 class="basics_head"> <u>Basics before you get into Prim's and Kruskal Algorithm:</u> </h2> 
+
+        <p>&rarr;
+            What is a Undirected Graph? <br><br>
+            &nbsp;&nbsp;  An undirected graph is graph, i.e., a set of objects (called vertices or nodes) that are connected together, where all the edges are bidirectional. An undirected graph is sometimes called an undirected network. In contrast, a graph where the edges point in a direction is called a directed graph. <br> 
+        </p>
+        <p> &rarr; 
+            What is a Spanning Tree? <br><br>
+            &nbsp;&nbsp;&nbsp; &nbsp;Given an undirected and connected graph G=(V,E), a spanning tree of the graph G is a tree that spans G (that is, it includes every vertex of G) and is a subgraph of G (every edge in the tree belongs to G)</p>
+
+            
+
+            <p> &rarr;
+                What is a Minimum Spanning Tree?(MST) <br><br>
+                
+                &nbsp;&nbsp;  The cost of the spanning tree is the sum of the weights of all the edges in the tree. There can be many spanning trees. Minimum spanning tree is the spanning tree where the cost is minimum among all the spanning trees. There also can be many minimum spanning trees. <br> <br>
+
+                Minimum spanning tree has direct application in the design of networks. It is used in algorithms approximating the travelling salesman problem, multi-terminal minimum cut problem and minimum-cost weighted perfect matching. Other practical applications are:
+                <ol>
+                    <li>Cluster Analysis</li>
+                    <li>Handwriting recognition</li>
+                    <li>Image segmentation</li>
+                </ol>
+            </p>
+
+            <p>&rarr;
+                What are Greedy Algorithms? <br><br>
+                &nbsp;&nbsp;  Greedy is an algorithmic paradigm that builds up a solution piece by piece, always choosing the next piece that offers the most obvious and immediate benefit. So the problems where choosing locally optimal also leads to global solution are best fit for Greedy.
+
+            </p>
+        <img src="./images/spanning_tree.jpg" alt="" class="spanning_tree">
+
+        <p>
+            There are two famous algorithms for finding the Minimum Spanning Tree: <b>1. Prim's Algorithm &nbsp; 2. Kruskal Algorithm</b> </p>
+
+        
+        
+
+    </div><hr>
+    <div id="prims">
+        <h1 >PRIM'S ALGORITHM</h1>
+        <div class="intro_prims">
+            <h3 style="font-size: 30px; color: white;"> <u>INTRODUCTION</u> </h3> 
+            <p style="font-size: 20px;">Prim’s algorithm is also a Greedy algorithm. It starts with an empty spanning tree. The idea is to maintain two sets of vertices. The first set contains the vertices already included in the MST, the other set contains the vertices not yet included. At every step, it considers all the edges that connect the two sets, and picks the minimum weight edge from these edges. After picking the edge, it moves the other endpoint of the edge to the set containing MST. </p>
+        </div>
+        <div>
+            <p> <b>Algorithm Steps</b>
+            <ol>
+                <li>Maintain two disjoint sets of vertices. One containing vertices that are in the growing spanning tree and other that are not in the growing spanning tree.</li>
+                <li>Select the cheapest vertex that is connected to the growing spanning tree and is not in the growing spanning tree and add it into the growing spanning tree. This can be done using Priority Queues. Insert the vertices, that are connected to growing spanning tree, into the Priority Queue.</li>
+                <li>Check for cycles. To do that, mark the nodes which have been already selected and insert only those nodes in the Priority Queue that are not marked.</li><br> <br> <br> <br>
+            </ol> 
+        </p> 
+        <p> Consider the example given below: <br> <br>
+            <img src="./images/primssteps.jpg" alt="Prims Steps" class="primssteps"> <br> <br>
+            In Prim’s Algorithm, we will start with an arbitrary node (it doesn’t matter which one) and mark it. In each iteration we will mark a new vertex that is adjacent to the one that we have already marked. As a greedy algorithm, Prim’s algorithm will select the cheapest edge and mark the vertex. So we will simply choose the edge with weight 1. In the next iteration we have three options, edges with weight 2, 3 and 4. So, we will select the edge with weight 2 and mark the vertex. Now again we have three options, edges with weight 3, 4 and 5. But we can’t choose edge with weight 3 as it is creating a cycle. So we will select the edge with weight 4 and we end up with the minimum spanning tree of total cost 7 ( = 1 + 2 +4).
+        </p>
+        </div> 
+        <div class="algo">
+            <h2 id="subhead"> <U>ALGORITHM:</U> </h2>
+            <p class="primalgo">
+                //Prim's algorithm to construct a minimum spanning tree <br>
+                INPUT: A weighted connected graph, G=(V,E) <br>
+                OUTPUT: Et, the set of edges composing a minimum spanning of G.<br>
+                &nbsp;&nbsp;    Vt &#8592; Vo<br>
+                &nbsp;&nbsp;    Et &#8592; 0<br>
+                for i &#8592;1 to |V|-1 <br>
+                &nbsp;&nbsp;    Find a minimum weight edge e*=(v*,u*) among all the edges (u,v), such that v is in Vt and <br>
+                &nbsp;&nbsp;    u is in V-Vt<br>
+                &nbsp;&nbsp;    Vt &#8592; Vt U {u*} <br>
+                &nbsp;&nbsp;    Et &#8592; Et U {e*} <br>
+                return Et
+            </p></div><hr>
+        <div id="kruskal">
+            <h1 >KRUSKAL ALGORITHM</h1>
+            <h3 style="font-size: 30px; color: white;"> <u>INTRODUCTION</u> </h3>
+        <p>
+            Kruskal's algorithm to find the minimum cost spanning tree uses the greedy approach. This algorithm treats the graph as a forest and every node it has as an individual tree. A tree connects to another only and only if, it has the least cost among all available options and does not violate MST properties. <br><br>
+
+            <b>Algorithm Steps</b> 
+
+            <ol>
+                <li>Sort the graph edges with respect to their weights.</li> <br>
+                <li>Start adding edges to the MST from the edge with the smallest weight until the edge of the largest weight.</li>
+                <li>Only add edges which doesn't form a cycle , edges which connect only disconnected components.</li>
+            </ol>
+        </p><br><br>
+        <p>Consider an example given below:</p> <br>
+        <img src="./images/kruskalsteps.jpg" alt="Kruskal Steps" class="kruskalsteps">
+        <p>In Kruskal’s algorithm, at each iteration we will select the edge with the lowest weight. So, we will start with the lowest weighted edge first i.e., the edges with weight 1. After that we will select the second lowest weighted edge i.e., edge with weight 2. Notice these two edges are totally disjoint. Now, the next edge will be the third lowest weighted edge i.e., edge with weight 3, which connects the two disjoint pieces of the graph. Now, we are not allowed to pick the edge with weight 4, that will create a cycle and we can’t have any cycles. So we will select the fifth lowest weighted edge i.e., edge with weight 5. Now the other two edges will create cycles so we will ignore them. In the end, we end up with a minimum spanning tree with total cost 11 ( = 1 + 2 + 3 + 5).</p>
+    </div> <br> 
+    <hr> 
+    <div>
+    <h2 id="subhead">ALGORITHM:</h2>
+    <p class="kruskalalgo">
+        // Algorithm Kruskal (E, cost, n, t) <br>
+        // E is the set of edges in G. G has n vertices , cost[u,v] is the cost of edge(u,v). t is the set of edges in the minimium cost spanning tree. The final cost is returned. <br>
+        { <br>
+          &nbsp;  Construct a heap out of the edge costs using heapify; <br>
+          &nbsp; for i &#8592; 1 to n do parent[i] = -1; <br>
+          &nbsp;  // Each vertex is in a different set <br>
+          &nbsp;  i &#8592; 0, mincost &#8592; 0.0; <br>
+          &nbsp; while ((i < n-1) and (heap not empty)) do <br>
+          &nbsp;  { <br>
+            &nbsp;&nbsp;  delete a minimum cost edge (u,v) from the heap and reheapify using adjust; <br>
+            &nbsp;&nbsp; j &#8592; Find(u); K &#8592; Find(v); <br>
+            &nbsp;&nbsp; if (j &ne; k) then <br>
+            &nbsp;&nbsp;&nbsp;  { <br>
+                &nbsp;&nbsp;&nbsp; i &#8592; i + 1; <br>
+                &nbsp;&nbsp;&nbsp;  t[i,1] &#8592; u; t[i,2] &#8592; v; <br>
+                &nbsp;&nbsp;&nbsp;  mincost &#8592; mincost + cost[u,v]; <br>
+                &nbsp;&nbsp;&nbsp;  union(j,k); <br>
+                &nbsp;&nbsp;  } <br>
+                &nbsp; } <br>
+            if (i &ne; n-1) then write ('No spanning tree'); <br>
+            else return mincost; <br>
+        }
+    </p>
+    </div></div>
+
+    <div id="buttons">
+        <hr><br><br>
+        <h1>SIMULATE NOW</h1>
+            <div class="grid-container">
+            <h2 class="griditem"><a href="prims.html"><h2>RUN <br> PRIM'S</h2></a>
+            <br><br>
+            <h2 class="griditem"><a href="kruskal.html"><h2>RUN <br> KRUSKAL</h2></a>
+        </div><hr>
+
+        <h1 id="about">TEAM</h1>
+        <div class="grid-container1">
+            <div class="grid-item1">
+                
+                <img src="./images/prasannasir.jpg" alt="prasanna" height="200px" width="170px">
+                <span class="teamname">PRASANNA KUMAR</span>
+                <span class="teamname1">Project Guide</span>
+                <span class="teamname2">Assistant Proffessor CSE Dept.</span>
+                
+                
+            </div>
+            <div class="grid-item1">
+                <img src="./images/rithvik.jpg" alt="rithvik" height="200px" width="160px">
+                <span class="teamname">RITHVIK M S</span>
+                <span class="teamname1">Frontend Web Designer</span>
+                <span class="teamname2">CSE Department</span>
+            </div>
+            <div class="grid-item1">
+                <img src="./images/p2.jpg" alt="p2" height="200px" width="160px">
+                <span class="teamname">K H PREETHAM</span>
+                <span class="teamname1">Frontend Web Designer</span>
+                <span class="teamname2">CSE Department</span>
+            </div>  
+            <div class="grid-item1">
+                <img src="./images/uganda.jpg" alt="uganda" height="200px" width="160px">
+                <span class="teamname">YASHWANTH K</span>
+                <span class="teamname1">Backend Java Developer</span>
+                <span class="teamname2">CSE Department</span>
+            </div>
+             
+          </div>
+
+          <footer>
+            <hr>
+            <span>&#169 Team - C17. All Rights Reserved</span><br>
+            <span>SIDDAGANGA INSTITUTE OF TECHOLOGY, TUMKUR</span>
+            <a href="#top"><h4>&uarr;</h4></a>
+        </footer>
+
+
+</body>
+</html>
